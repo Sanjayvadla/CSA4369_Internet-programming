@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Restaurant Bill</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      background-color: #fff; /* Light background color for the popup */
+      border: none; /* Remove the border */
+    }
+    #popup-shade {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+    #popup-text {
+      padding: 0;
+      background-color: #fff; /* Light background color for the main content */
+      border-radius: 0;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center contents horizontally */
+      justify-content: center; /* Center contents vertically */
+      text-align: center; /* Center text within the popup */
+    }
+    #popup-shade-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 20%;
+      background-color: rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center; /* Center text horizontally */
+      justify-content: center; /* Center text vertically */
+    }
+  </style>
+</head>
+<body>
+  <h1>Restaurant Bill Calculator</h1>
+  <form id="restaurantForm">
+    <label for="restaurantName">Restaurant Name:</label>
+    <input type="text" id="restaurantName" required>
+    <br><br>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" required>
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div id="popup">
+    <div id="popup-shade">
+      <div id="popup-shade-top">
+        <h1>Status Details</h1>
+      </div>
+    </div>
+    <div id="popup-text">
+      <h2>Restaurant Bill Information</h2>
+      <p id="popupText"></p>
+      <button id="closePopup">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const restaurantForm = document.getElementById('restaurantForm');
+    const popup = document.getElementById('popup');
+    const popupShade = document.getElementById('popup-shade');
+    const popupText = document.getElementById('popupText');
+    const closePopup = document.getElementById('closePopup');
+
+    restaurantForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const restaurantName = document.getElementById('restaurantName').value;
+      const amount = document.getElementById('amount').value;
+
+      // Display the information in the popup
+      popupText.textContent = `Restaurant Name: ${restaurantName}\nAmount: $${amount}`;
+      popup.style.display = 'block';
+      popupShade.style.display = 'block';
+    });
+
+    closePopup.addEventListener('click', function () {
+      // Close the popup when the "Close" button is clicked
+      popup.style.display = 'none';
+      popupShade.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
